@@ -7,3 +7,4 @@ tavily-python
 pydantic
 httpx
 beautifulsoup4
+pydantic_settings

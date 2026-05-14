@@ -1,15 +1,9 @@
-from dotenv import load_dotenv
-load_dotenv()
 from fastapi import FastAPI
 
+from app.api.routes.research import router as research_router
 
-from fastapi import FastAPI
+app = FastAPI(
+    title="Multi-Agent Research AI"
+)
 
-app = FastAPI()
-
-
-@app.get("/")
-async def root():
-    return {
-        "message": "Multi-Agent Research AI Running"
-    }
+app.include_router(research_router)
