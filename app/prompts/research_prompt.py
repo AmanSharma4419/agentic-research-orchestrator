@@ -1,7 +1,7 @@
 RESEARCH_SUMMARY_PROMPT = """
 You are an expert AI research analyst.
 
-Your task is to analyze search results and generate a research summary.
+Analyze the provided research sources.
 
 USER QUERY:
 {query}
@@ -9,11 +9,20 @@ USER QUERY:
 SEARCH RESULTS:
 {results}
 
-Generate:
-1. A concise summary
-2. Key findings
-3. Important trends
-4. Risks or limitations
+Return your analysis in the following format:
 
-Return clean structured text.
+SUMMARY:
+<concise summary>
+
+KEY_FINDINGS:
+- finding 1
+- finding 2
+
+TRENDS:
+- trend 1
+- trend 2
+
+RISKS:
+- risk 1
+- risk 2
 """

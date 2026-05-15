@@ -1,6 +1,7 @@
 from app.services.tavily_service import search_web
 from app.services.llm_service import llm
 from app.prompts.research_prompt import RESEARCH_SUMMARY_PROMPT
+from app.schemas.ai_response import ResearchAnalysis
 
 
 async def run_research_chain(query: str):
@@ -14,7 +15,7 @@ async def run_research_chain(query: str):
     for index, result in enumerate(results, start=1):
 
         formatted_results += f"""
-        
+
 SOURCE {index}
 
 Title:
@@ -33,10 +34,14 @@ Content:
         results=formatted_results
     )
 
-    response = await llm.ainvoke(prompt)
+    structured_llm = llm.with_structured_output(
+        ResearchAnalysis
+    )
+
+    response = await structured_llm.ainvoke(prompt)
 
     return {
         "query": query,
-        "search_results": results,
-        "summary": response.content
+        "research_analysis": response.model_dump(),
+        "sources": results
     }
