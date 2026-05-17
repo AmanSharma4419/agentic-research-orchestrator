@@ -1,9 +1,9 @@
 import json
 from typing import TypedDict
-
 from app.agents.builder_research_agent import build_research_agent
 from app.agents.builder_evaluate_agent import build_evaluator_agent
 from app.prompts.evaluation_prompt import EVALUATION_USER_PROMPT
+from app.db.checkpointer import checkpointer
 
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import interrupt
@@ -59,7 +59,7 @@ async def human_check_node(state: ResearchState):
 
     score = state.get("score", 0)
 
-    if score >= 8:
+    if score >= 18:
         return {"human_decision": "approve"}
 
     decision = interrupt({
@@ -96,4 +96,4 @@ graph.add_conditional_edges(
     }
 )
 
-research_graph = graph.compile()
+research_graph = graph.compile(checkpointer=checkpointer)

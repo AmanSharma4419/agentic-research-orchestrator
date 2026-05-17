@@ -9,3 +9,5 @@ httpx
 beautifulsoup4
 pydantic_settings
 langgraph
+langgraph-checkpoint-mongodb 
+pymongo

@@ -5,6 +5,8 @@ from app.api.routes.agent_research import router as agent_research_router
 from app.api.routes.research_graph import (
     router as research_graph_router
 )
+from app.api.routes.human_in_loop.resume import router as resume_router
+
 app = FastAPI(
     title="Multi-Agent Research AI"
 )
@@ -12,3 +14,5 @@ app = FastAPI(
 app.include_router(research_router)
 app.include_router(agent_research_router)
 app.include_router(research_graph_router)
+app.include_router(resume_router)
+
